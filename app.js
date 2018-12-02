@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const test = require('./routers/test')
 const pictureAnalysis = require('./routers/picture_analysis')
 const app = express();
-const getConnection = require('./db/mysql')
+//const getConnection = require('./db/mysql')
 
 app.use((req, res, next) =>{
     res.header("Access-Control-Allow-Origin", "*")
