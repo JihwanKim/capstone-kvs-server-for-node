@@ -1,8 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const test = require('./routers/test')
+const health = require('./routers/health')
 const pictureAnalysis = require('./routers/picture_analysis')
+const setting = require('./routers/setting')
+const sms = require('./routers/sms')
 const app = express();
+const http = require('http')
 //const getConnection = require('./db/mysql')
 
 app.use((req, res, next) =>{
@@ -14,6 +18,15 @@ app.use((req, res, next) =>{
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use('/test', test)
+app.use('/health', health)
 app.use('/picture', pictureAnalysis)
+app.use('/setting', setting)
+app.use('/sms', sms)
 
-module.exports = app
+
+
+const { PORT } = require('./constants')
+
+http.createServer(app).listen(PORT, () => {
+    console.info(`Backend Server is running on ${PORT}..`)
+})

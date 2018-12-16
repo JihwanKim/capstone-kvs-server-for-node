@@ -1,13 +1,7 @@
 var mysql      = require('mysql');
+const mysqlConfig = require('../config/config_for_mysql');
 
-var pool = mysql.createPool({
-  host     : '',
-  user     : '',
-  password : '',
-  port     : 3306,
-  database : '',
-  connectionLimit : 10
-});
+var pool = mysql.createPool(mysqlConfig);
 
 var getConnection = function (cb) {
   pool.getConnection(function (err, connection) {
