@@ -30,7 +30,7 @@ router.get('/:phone_number', function(req, res, next){
     if(err) {
       console.log(err);
     }
-    var userQuery = 'SELECT * FROM tb_analysis WHERE phone_number = ? AND insert_at < ? ORDER BY insert_at DESC';
+    var userQuery = 'SELECT * FROM tb_analysis WHERE phone_number = ? AND insert_at < ? ORDER BY insert_at DESC LIMIT 200';
     con.query(userQuery,[phoneNumber, startDatetime], function(err, rows){
       if (err){
         console.log(err);
@@ -63,7 +63,7 @@ function DetectFace(phoneNumber, buffer, res){
       res.json({error:err});
     } // an error occurred
     else     {
-      getConnection(function (err, con) {
+      getConnection(async function (err, con) {
         if(err) {
           console.log(err);
         }

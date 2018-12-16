@@ -3,7 +3,7 @@ const mysqlConfig = require('../config/config_for_mysql');
 
 var pool = mysql.createPool(mysqlConfig);
 
-var getConnection = function (cb) {
+var getConnection = async function (cb) {
   pool.getConnection(function (err, connection) {
       //if(err) throw err;
       //pass the error to the cb instead of throwing it
