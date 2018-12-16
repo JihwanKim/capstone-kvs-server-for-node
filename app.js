@@ -7,7 +7,7 @@ const setting = require('./routers/setting')
 const sms = require('./routers/sms')
 const app = express();
 const http = require('http')
-//const getConnection = require('./db/mysql')
+const serverConfig = require('./config/config_for_server')
 
 app.use((req, res, next) =>{
     res.header("Access-Control-Allow-Origin", "*")
@@ -15,6 +15,7 @@ app.use((req, res, next) =>{
     res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
     next();
 })
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use('/test', test)
@@ -25,8 +26,7 @@ app.use('/sms', sms)
 
 
 
-const { PORT } = require('./constants')
 
-http.createServer(app).listen(PORT, () => {
-    console.info(`Backend Server is running on ${PORT}..`)
+http.createServer(app).listen(serverConfig.PORT, () => {
+    console.info(`Backend Server is running on ${serverConfig.PORT}..`)
 })
